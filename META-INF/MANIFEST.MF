@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CopilotEclipse
-Bundle-SymbolicName: copilotEclipse
+Bundle-SymbolicName: copilotEclipse; singleton:=true 
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: copiloteclipse.Activator
 Require-Bundle: org.eclipse.ui,
