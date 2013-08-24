@@ -1,4 +1,4 @@
-package copiloteclipse;
+package com.expedia.copilot.eclipse;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

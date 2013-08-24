@@ -17,7 +17,7 @@
          <action
                label="&amp;Copilot"
                icon="icons/sample.gif"
-               class="copiloteclipse.CoPilot"
+               class="com.expedia.copilot.eclipse.CoPilot"
                tooltip="Hello Copilot"
                menubarPath="copilot/sampleGroup"
                toolbarPath="sampleGroup"

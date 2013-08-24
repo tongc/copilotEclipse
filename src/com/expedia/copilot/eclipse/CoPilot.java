@@ -1,4 +1,4 @@
-package copiloteclipse;
+package com.expedia.copilot.eclipse;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
