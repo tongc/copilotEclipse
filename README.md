@@ -1,4 +1,2 @@
 copilotEclipse
 ==============
-test
-test1
