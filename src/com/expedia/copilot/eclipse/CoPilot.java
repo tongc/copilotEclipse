@@ -5,6 +5,10 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.expedia.copilot.service.MessagePublishingService;
 
 /**
  * Our sample action implements workbench action delegate.
@@ -30,13 +34,17 @@ public class CoPilot implements IWorkbenchWindowActionDelegate {
 	 */
 	@Override
 	public void run(IAction action) {
+		ApplicationContext context= new ClassPathXmlApplicationContext("copilotEclipse.xml");
+		MessagePublishingService service = context.getBean(MessagePublishingService.class);
+		service.send("copilotMessage", "test");
+
 		MessageDialog.openInformation(
 			window.getShell(),
 			"CoPilot",
 			"Copilot"+ action.toString());
 	}
 
-	/**
+	/**s
 	 * Selection in the workbench has been changed. We
 	 * can change the state of the 'real' action here
 	 * if we want, but this can only happen after
