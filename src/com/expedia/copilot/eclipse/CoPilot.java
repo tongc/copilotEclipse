@@ -8,6 +8,7 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.expedia.copilot.domain.Editing;
 import com.expedia.copilot.service.MessagePublishingService;
 
 /**
@@ -36,7 +37,7 @@ public class CoPilot implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("copilotEclipse.xml");
 		MessagePublishingService service = context.getBean(MessagePublishingService.class);
-		service.send("copilotMessage", "test");
+		service.send("copilotMessage", "", new Editing());
 
 		MessageDialog.openInformation(
 			window.getShell(),
