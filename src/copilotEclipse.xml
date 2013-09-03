@@ -27,6 +27,14 @@
 	<context:component-scan base-package="com.expedia.copilot.util"/>
 	<context:component-scan base-package="com.expedia.copilot.handler" />
 	
-	<rabbit:connection-factory id="connectionFactory" host="127.0.0.1" />
-	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" />
+	<context:property-placeholder location="classpath:copilotEclipse.properties"/>
+	
+	<rabbit:queue name="copilotMessageQueue" />
+	<rabbit:listener-container
+		connection-factory="connectionFactory" message-converter="jsonMessageConverter">
+		<rabbit:listener queues="copilotMessageQueue" ref="editingMessageHandler"
+			method="handle" />
+	</rabbit:listener-container>
+	
+	<bean id="editingMessageHandler" class="com.expedia.copilot.eclipse.EditingMessageHandler"></bean>
 </beans>

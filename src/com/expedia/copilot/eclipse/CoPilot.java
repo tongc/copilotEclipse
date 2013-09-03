@@ -34,7 +34,7 @@ public class CoPilot implements IWorkbenchWindowActionDelegate {
 	 */
 	@Override
 	public void run(IAction action) {
-		ApplicationContext context= new ClassPathXmlApplicationContext("copilotEclipse.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("copilotEclipse.xml");
 		MessagePublishingService service = context.getBean(MessagePublishingService.class);
 		service.send("copilotMessage", "test");
 
