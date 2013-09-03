@@ -1,8 +1,11 @@
 package com.expedia.copilot.eclipse;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.springframework.context.ApplicationContext;
@@ -37,12 +40,16 @@ public class CoPilot implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("copilotEclipse.xml");
 		MessagePublishingService service = context.getBean(MessagePublishingService.class);
-		service.send("copilotMessage", "", new Editing());
-
-		MessageDialog.openInformation(
-			window.getShell(),
-			"CoPilot",
-			"Copilot"+ action.toString());
+		EditingMessageHandler handler = context.getBean(EditingMessageHandler.class);
+		MessageBox box = new MessageBox(window.getShell(),SWT.ICON_INFORMATION);
+		EditingCallBackHandle callbackHandle = new EditingCallBackHandle(box);
+		handler.setCallbackHandle(callbackHandle);
+		InputDialog dialog = new InputDialog(window.getShell(),"Lets try!",
+      			"Please enter your message","",null);
+	      if( dialog.open()== IStatus.OK){
+	          String value = dialog.getValue();
+	          service.send("copilotMessage", "", new Editing.Builder().withValue(value).build());
+	      }
 	}
 
 	/**s
