@@ -144,6 +144,7 @@ public class CoPilot implements IWorkbenchWindowActionDelegate {
 				projectNode.flush();
 
 				pro.setDefaultCharset("UTF-8", null);
+				pro.getDescription().getBuildSpec();
 				for(IBuildConfiguration ibc:pro.getBuildConfigs()) {
 					logger.log(LogService.LOG_ERROR, ibc.getName());
 				}
